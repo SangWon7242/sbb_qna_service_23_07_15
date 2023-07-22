@@ -1,9 +1,6 @@
 package com.exam.sbb.controller;
 
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +8,9 @@ import lombok.Setter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -222,33 +222,33 @@ public class MainController {
   public Person addPerson(Person p) {
     return p;
   }
+}
 
-  @AllArgsConstructor
-  @Getter
-  @Setter
-  class Article {
-    private static int lastId = 0;
-    private int id;
-    private String title;
-    private String body;
+@AllArgsConstructor
+@Getter
+@Setter
+class Article {
+  private static int lastId = 0;
+  private int id;
+  private String title;
+  private String body;
 
-    public Article(String title, String body) {
-      this(++lastId, title, body);
-    }
+  public Article(String title, String body) {
+    this(++lastId, title, body);
   }
+}
 
-  @AllArgsConstructor
-  @NoArgsConstructor
-  @Getter
-  @Setter
-  class Person {
-    private int id;
-    private int age;
-    private String name;
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+class Person {
+  private int id;
+  private int age;
+  private String name;
 
-    public Person(int age, String name) {
-      this.age = age;
-      this.name = name;
-    }
+  public Person(int age, String name) {
+    this.age = age;
+    this.name = name;
   }
 }
