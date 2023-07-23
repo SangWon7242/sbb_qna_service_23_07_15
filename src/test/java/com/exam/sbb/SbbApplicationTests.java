@@ -48,6 +48,6 @@ class SbbApplicationTests {
 
 	@Test
 	void testJpa3() {
-		Question q = questionRepository.findBySubject("sbb가 무엇인가요?");
+		Question q = questionRepository.findByContent("sbb가 무엇인가요?");
 	}
 }
