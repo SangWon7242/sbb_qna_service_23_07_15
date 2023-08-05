@@ -21,13 +21,13 @@ public class QuestionService {
     return questionRepository.findAll();
   }
 
-  public Question getQuestion(int id) {
+  public Question getQuestion(int id) throws DataNotFoundException {
     Optional<Question> oq = questionRepository.findById(id);
 
     if (oq.isPresent()) {
       return oq.get();
     }
-    
+
     throw new DataNotFoundException("question not found");
   }
 }
