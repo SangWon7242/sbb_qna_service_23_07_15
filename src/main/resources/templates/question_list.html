@@ -1,5 +1,3 @@
-<h1>안녕</h1>
-
 <table>
   <thead>
   <tr>
@@ -17,9 +15,6 @@
         <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
       </td>
       <td th:text="|Date. ${#strings.substring(question.createDate, 2, 16)}|"></td>
-      <td>
-        [[${question.subject}]]
-      </td>
     </tr>
   </tbody>
 </table>
