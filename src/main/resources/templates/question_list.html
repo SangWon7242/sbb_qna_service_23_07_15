@@ -10,18 +10,16 @@
   </thead>
   <tbody>
     <tr th:each="question, loop : ${questionList}">
-      <!--
-      <td>
-        [[${loop.index}]]/[[${loop.size}]]
-      </td>
-      -->
       <td>
         [[${question.id}]]
       </td>
       <td>
-        [[${question.subject}]]
+        <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
       </td>
       <td th:text="|Date. ${#strings.substring(question.createDate, 2, 16)}|"></td>
+      <td>
+        [[${question.subject}]]
+      </td>
     </tr>
   </tbody>
 </table>
