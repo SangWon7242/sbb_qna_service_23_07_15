@@ -1,5 +1,7 @@
 package com.exam.sbb.question;
 
+import com.exam.sbb.answer.AnswerForm;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("/question")
@@ -37,7 +38,7 @@ public class QuestionController {
   }
 
   @GetMapping(value = "/detail/{id}")
-  public String detail(Model model, @PathVariable int id) {
+  public String detail(Model model, @PathVariable int id, AnswerForm answerForm) {
     Question question = questionService.getQuestion(id);
 
     model.addAttribute("question", question);

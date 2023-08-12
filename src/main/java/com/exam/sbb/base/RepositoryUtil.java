@@ -1,9 +1,8 @@
 package com.exam.sbb.base;
 
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-
-import javax.transaction.Transactional;
 
 public interface RepositoryUtil {
   @Modifying
