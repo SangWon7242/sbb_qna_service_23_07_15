@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -123,4 +124,22 @@ class QuestionRepositoryTests {
 
 		assertThat(q.getSubject()).isEqualTo("sbb가 무엇인가요?");
 	}
+
+	@Test
+	void createManySampleData() {
+		// 대량의 테스트 데이터 필요한 경우에만 true변경
+		boolean run = false;
+
+		if(run == false) return;
+
+		IntStream.rangeClosed(3, 300).forEach(id -> {
+			Question q = new Question();
+			q.setSubject("%d번 질문".formatted(id));
+			q.setContent("%d번 질문의 내용".formatted(id));
+			q.setCreateDate(LocalDateTime.now());
+			questionRepository.save(q);
+		});
+
+	}
+
 }
