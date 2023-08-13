@@ -131,7 +131,7 @@ class QuestionRepositoryTests {
 	@Test
 	void createManySampleData() {
 		// 대량의 테스트 데이터 필요한 경우에만 true변경
-		boolean run = true;
+		boolean run = false;
 
 		if(run == false) return;
 
