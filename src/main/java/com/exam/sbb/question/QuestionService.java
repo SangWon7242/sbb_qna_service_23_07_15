@@ -2,10 +2,12 @@ package com.exam.sbb.question;
 
 import com.exam.sbb.DataNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class QuestionService {
@@ -17,8 +19,9 @@ public class QuestionService {
     this.questionRepository = questionRepository;
   }
 
-  public List<Question> getList() {
-    return questionRepository.findAll();
+  public Page<Question> getList(int page) {
+    Pageable pageable = PageRequest.of(page, 10); // 한 페이지에 게시물 10까지 가능
+    return questionRepository.findAll(pageable);
   }
 
   public Question getQuestion(int id) throws DataNotFoundException {
