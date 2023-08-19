@@ -39,11 +39,16 @@ public class UserController {
     } catch (SignupUsernameDuplicatedException e) {
       bindingResult.reject("signupUsernameDuplicated", e.getMessage());
       return "signup_form";
-    } catch(SignupEmailDuplicatedException e) {
+    } catch (SignupEmailDuplicatedException e) {
       bindingResult.reject("signupEmailDuplicated", e.getMessage());
       return "signup_form";
     }
 
     return "redirect:/";
+  }
+
+  @GetMapping("/login")
+  public String login() {
+    return "login_form";
   }
 }
