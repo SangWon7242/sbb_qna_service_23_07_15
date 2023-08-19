@@ -17,4 +17,5 @@ public class UserServiceTests {
   public void t1() {
     userService.create("user1", "user1@eamil.com", "1234");
   }
+
 }
