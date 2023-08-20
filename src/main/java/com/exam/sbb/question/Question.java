@@ -1,8 +1,10 @@
 package com.exam.sbb.question;
 
 import com.exam.sbb.answer.Answer;
+import com.exam.sbb.user.SiteUser;
 import jakarta.persistence.*;
 import lombok.Data;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.List;
 public class Question {
   @Id // primary key
   @GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment
-  private Long id;
+  private int id;
 
   @Column(length = 200) // varchar(200)
   private String subject;
@@ -25,6 +27,9 @@ public class Question {
 
   @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
   private List<Answer> answerList = new ArrayList<>();
+
+  @ManyToOne
+  private SiteUser author;
 
   public void addAnswer(Answer answer) {
     answer.setQuestion(this);

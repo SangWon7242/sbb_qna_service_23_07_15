@@ -1,6 +1,7 @@
 package com.exam.sbb.answer;
 
 import com.exam.sbb.question.Question;
+import com.exam.sbb.user.SiteUser;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 public class Answer {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  private int id;
 
   @Column(columnDefinition = "TEXT")
   private String content;
@@ -22,4 +23,7 @@ public class Answer {
 
   @ManyToOne
   private Question question;
+
+  @ManyToOne
+  private SiteUser author;
 }
