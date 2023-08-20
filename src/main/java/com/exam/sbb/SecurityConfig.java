@@ -29,7 +29,12 @@ public class SecurityConfig {
                 XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
         .formLogin((formLogin) -> formLogin
             .loginPage("/user/login") // 스프링시큐리티 로그인 폼 url 해당 url로 사용하겠다.
-            .defaultSuccessUrl("/")); // 로그인 성공하고 나면 home으로 이동
+            .defaultSuccessUrl("/")) // 로그인 성공하고 나면 home으로 이동
+        .logout((logout) -> logout
+            .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
+            .logoutSuccessUrl("/")
+            .invalidateHttpSession(true));
+
 
     return http.build();
   }

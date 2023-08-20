@@ -1,6 +1,7 @@
 package com.exam.sbb.question;
 
 import com.exam.sbb.answer.AnswerForm;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -25,7 +26,8 @@ public class QuestionController {
 
   @GetMapping("/list")
   // 이 자리에 @ResponseBody가 없으면 resources/templates/question_list.html 파일을 뷰로 삼는다.
-  public String list(Model model, @RequestParam(defaultValue="0") int page) {
+  public String list(HttpSession session, Model model, @RequestParam(defaultValue="0") int page) {
+
     Page<Question> paging = questionService.getList(page);
     // 미리 실행된 question_list.html에서
     // questionList 라는 이름으로 questionList 변수를 사용할 수 있다.
