@@ -2,6 +2,8 @@ package com.exam.sbb;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -29,7 +31,11 @@ public class SecurityConfig {
             .loginPage("/user/login") // 스프링시큐리티 로그인 폼 url 해당 url로 사용하겠다.
             .defaultSuccessUrl("/")); // 로그인 성공하고 나면 home으로 이동
 
-
     return http.build();
+  }
+
+  @Bean
+  AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    return authenticationConfiguration.getAuthenticationManager();
   }
 }
