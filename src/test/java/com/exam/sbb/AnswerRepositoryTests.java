@@ -24,7 +24,6 @@ public class AnswerRepositoryTests {
 
   @Autowired
   private AnswerRepository answerRepository;
-  private int lastSampleDataId;
 
   @BeforeEach
   @Transactional
@@ -34,10 +33,14 @@ public class AnswerRepositoryTests {
     createSampleData();
   }
 
-  private void clearData() {
+  public static void clearData(AnswerRepository answerRepository, QuestionRepository questionRepository) {
     QuestionRepositoryTests.clearData(questionRepository);
     answerRepository.deleteAll();
     answerRepository.truncateTable();
+  }
+
+  private void clearData() {
+    clearData(answerRepository, questionRepository);
   }
 
   private void createSampleData() {
