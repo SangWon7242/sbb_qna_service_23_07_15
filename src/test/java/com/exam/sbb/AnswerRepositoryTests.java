@@ -4,6 +4,7 @@ import com.exam.sbb.answer.Answer;
 import com.exam.sbb.answer.AnswerRepository;
 import com.exam.sbb.question.Question;
 import com.exam.sbb.question.QuestionRepository;
+import com.exam.sbb.user.SiteUser;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,15 +48,17 @@ public class AnswerRepositoryTests {
     QuestionRepositoryTests.createSampleData(questionRepository);
 
     // 관련 답변이 하나도 없는 상태에서 쿼리 발생
-    Question q = questionRepository.findById(Math.toIntExact(1L)).get();
+    Question q = questionRepository.findById(1).get();
 
     Answer a1 = new Answer();
     a1.setContent("sbb는 질문답변 게시판입니다.");
+    a1.setAuthor(new SiteUser(1L));
     a1.setCreateDate(LocalDateTime.now());
     q.addAnswer(a1);
 
     Answer a2 = new Answer();
     a2.setContent("sbb에서는 주로 스프링관련 내용을 다룹니다.");
+    a2.setAuthor(new SiteUser(2L));
     a2.setCreateDate(LocalDateTime.now());
     q.addAnswer(a2);
 
@@ -70,11 +73,13 @@ public class AnswerRepositoryTests {
 
     Answer a1 = new Answer();
     a1.setContent("네 자동으로 생성됩니다.");
+    a1.setAuthor(new SiteUser(1L));
     a1.setCreateDate(LocalDateTime.now());
     q.addAnswer(a1);
 
     Answer a2 = new Answer();
     a2.setContent("네네 맞습니다!!!");
+    a2.setAuthor(new SiteUser(2L));
     a2.setCreateDate(LocalDateTime.now());
     q.addAnswer(a2);
 
