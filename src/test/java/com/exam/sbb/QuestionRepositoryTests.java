@@ -5,6 +5,7 @@ import com.exam.sbb.question.Question;
 import com.exam.sbb.question.QuestionRepository;
 import com.exam.sbb.user.SiteUser;
 import com.exam.sbb.user.UserRepository;
+import com.exam.sbb.user.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ class QuestionRepositoryTests {
 	private AnswerRepository answerRepository;
 
 	@Autowired
+	private UserService userService;
+
+	@Autowired
 	private UserRepository userRepository;
 
 	private static int lastSampleDataId;
@@ -39,7 +43,9 @@ class QuestionRepositoryTests {
 		createSampleData();
 	}
 
-	public static int createSampleData(QuestionRepository questionRepository) {
+	public static int createSampleData(UserService userService, QuestionRepository questionRepository) {
+		UserServiceTests.createSampleData(userService);
+
 		Question q1 = new Question();
 		q1.setSubject("sbb가 무엇인가요?");
 		q1.setContent("sbb에 대해서 알고 싶습니다.");
@@ -60,7 +66,7 @@ class QuestionRepositoryTests {
 	}
 
 	private void createSampleData() {
-		lastSampleDataId = createSampleData(questionRepository);
+		lastSampleDataId = createSampleData(userService, questionRepository);
 	}
 
 	public static void clearData(UserRepository userRepository,

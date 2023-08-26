@@ -6,6 +6,7 @@ import com.exam.sbb.question.Question;
 import com.exam.sbb.question.QuestionRepository;
 import com.exam.sbb.user.SiteUser;
 import com.exam.sbb.user.UserRepository;
+import com.exam.sbb.user.UserService;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,6 +28,8 @@ public class AnswerRepositoryTests {
   @Autowired
   private AnswerRepository answerRepository;
 
+  @Autowired
+  private UserService userService;
   @Autowired
   private UserRepository userRepository;
 
@@ -50,7 +53,7 @@ public class AnswerRepositoryTests {
   }
 
   private void createSampleData() {
-    QuestionRepositoryTests.createSampleData(questionRepository);
+    QuestionRepositoryTests.createSampleData(userService, questionRepository);
 
     // 관련 답변이 하나도 없는 상태에서 쿼리 발생
     Question q = questionRepository.findById(1).get();
