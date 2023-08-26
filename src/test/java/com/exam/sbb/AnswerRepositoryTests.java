@@ -5,6 +5,7 @@ import com.exam.sbb.answer.AnswerRepository;
 import com.exam.sbb.question.Question;
 import com.exam.sbb.question.QuestionRepository;
 import com.exam.sbb.user.SiteUser;
+import com.exam.sbb.user.UserRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,6 +27,9 @@ public class AnswerRepositoryTests {
   @Autowired
   private AnswerRepository answerRepository;
 
+  @Autowired
+  private UserRepository userRepository;
+
   @BeforeEach
   @Transactional
   @Rollback(false)
@@ -34,14 +38,15 @@ public class AnswerRepositoryTests {
     createSampleData();
   }
 
-  public static void clearData(AnswerRepository answerRepository, QuestionRepository questionRepository) {
-    QuestionRepositoryTests.clearData(questionRepository);
-    answerRepository.deleteAll();
-    answerRepository.truncateTable();
+  public static void clearData(UserRepository userRepository,
+                               AnswerRepository answerRepository,
+                               QuestionRepository questionRepository) {
+
+    UserServiceTests.clearData(userRepository, answerRepository, questionRepository);
   }
 
   private void clearData() {
-    clearData(answerRepository, questionRepository);
+    clearData(userRepository, answerRepository, questionRepository);
   }
 
   private void createSampleData() {
