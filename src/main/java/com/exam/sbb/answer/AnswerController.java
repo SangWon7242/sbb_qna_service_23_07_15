@@ -30,7 +30,6 @@ public class AnswerController {
   @PreAuthorize("isAuthenticated()")
   @PostMapping("/create/{id}")
   public String createAnswer(Principal principal, Model model, @PathVariable int id, @Valid AnswerForm answerForm, BindingResult bindingResult) {
-    SiteUser siteUser = userService.getUser(principal.getName());
 
     Question question = questionService.getQuestion(id);
 
@@ -38,6 +37,8 @@ public class AnswerController {
       model.addAttribute("question", question);
       return "question_detail";
     }
+
+    SiteUser siteUser = userService.getUser(principal.getName());
     
     // 답변 등록 시작
     answerService.create(question, answerForm.getContent(), siteUser);
