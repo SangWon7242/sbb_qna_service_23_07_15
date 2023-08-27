@@ -1,6 +1,5 @@
 package com.exam.sbb.answer;
 
-import com.exam.sbb.DataNotFoundException;
 import com.exam.sbb.question.Question;
 import com.exam.sbb.question.QuestionService;
 import com.exam.sbb.user.SiteUser;
@@ -56,10 +55,6 @@ public class AnswerController {
   public String answerModify(AnswerForm answerForm, @PathVariable("id") Integer id, Principal principal) {
     Answer answer = answerService.getAnswer(id);
 
-    if(answer == null) {
-      throw new DataNotFoundException("데이터가 없습니다.");
-    }
-
     if (!answer.getAuthor().getUsername().equals(principal.getName())) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
     }
@@ -72,6 +67,21 @@ public class AnswerController {
   @PostMapping("/modify/{id}")
   public String answerModify(@Valid AnswerForm answerForm, BindingResult bindingResult,
                              @PathVariable("id") Integer id, Principal principal) {
-    return answerForm.getContent();
+    // 오류나면 되돌아 가는 것이 아닌 다시 이 view를 보여줘라.
+    if (bindingResult.hasErrors()) {
+      return "answer_form";
+    }
+
+    Answer answer = answerService.getAnswer(id);
+    // 해당 id를 받아와서 처리, 없으면 null 처리 해주는 거고
+    // 없으면 answerService getAnswer에서 에러 처리를 해줌
+    // if null을 안해도 상관 없음.
+
+    if (!answer.getAuthor().getUsername().equals(principal.getName())) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
+    }
+
+    answerService.modify(answer, answerForm.getContent());
+    return String.format("redirect:/question/detail/%s", answer.getQuestion().getId());
   }
 }
