@@ -8,6 +8,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity // 아래 Question 클래스는 엔티티 클래스이다.
@@ -36,4 +37,7 @@ public class Question {
     answer.setQuestion(this);
     getAnswerList().add(answer);
   }
+
+  @ManyToMany
+  Set<SiteUser> voter;
 }
