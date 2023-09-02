@@ -12,5 +12,38 @@
 ### 로그인 기능
 
 ## 남은 목표
-- [x] 마크다운 적용
-- [ ] 검색 기능 구현
+- [.] 검색 기능 구현
+
+### 검색 기능
+1. 제목검색
+   ```sql
+   SELECT Q.*
+   FROM question AS Q
+   WHERE Q.subject LIKE '%sbb%';
+   ```
+
+2. 제목 + 내용 검색
+   ```sql
+   SELECT Q.*
+   FROM question AS Q
+   WHERE (
+     Q.subject LIKE '%sbb%'
+     OR
+     Q.content LIKE '%알고%'
+   );
+   ```
+
+3. 제목 + 내용 검색 + 작성자
+   ```sql
+   SELECT Q.*
+   FROM question AS Q
+   LEFT JOIN site_user AS SU
+   ON Q.author_id = SU.id
+   WHERE (
+     Q.subject LIKE '%user1%'
+     OR
+     Q.content LIKE '%user1%'
+     OR
+     SU.username LIKE '%user1%'
+   );
+   ```
