@@ -15,6 +15,7 @@
 - [.] 검색 기능 구현
 
 ### 검색 기능
+#### 구현 : 질문 제목, 질문 내용, 질문 작성자
 1. 제목검색
    ```sql
    SELECT Q.*
@@ -46,4 +47,26 @@
      OR
      SU.username LIKE '%user1%'
    );
+   ```
+
+#### 구현 : 답변 내용, 답변 작성
+- 문제 1 : 1번 글이 답변이 10개라는 이유로 10개가 출력
+- 해결 : DISTINCT or GROUP BY
+---
+- 문제 2 : 2번 글이 답변이 없다는 이유로 누락
+- 해결 : LEFT JOIN
+
+   ```sql
+   # DISTINCT 붙여서 해결
+   SELECT DISTINCT Q.id
+   FROM question AS Q
+   INNER JOIN answer AS A
+   ON Q.id = A.question_id;
+   
+   # GROUP BY 붙여서 해결
+   SELECT Q.id, A.id
+   FROM question AS Q
+   INNER JOIN answer AS A
+   ON Q.id = A.question_id
+   GROUP BY Q.id;
    ```
