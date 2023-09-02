@@ -44,10 +44,10 @@ public class AnswerController {
     SiteUser siteUser = userService.getUser(principal.getName());
     
     // 답변 등록 시작
-    answerService.create(question, answerForm.getContent(), siteUser);
+    Answer answer = answerService.create(question, answerForm.getContent(), siteUser);
     // 답변 등록 끝
     
-    return String.format("redirect:/question/detail/%s", id);
+    return String.format("redirect:/question/detail/%s#answer_%d", id, answer.getId());
   }
 
   @PreAuthorize("isAuthenticated()")
