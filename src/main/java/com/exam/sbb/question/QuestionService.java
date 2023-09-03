@@ -34,7 +34,7 @@ public class QuestionService {
       return questionRepository.findAll(pageable);
     }
 
-    return questionRepository.findBySubjectContainingOrContentContaining(kw, kw, pageable);
+    return questionRepository.findBySubjectContainsOrContentContainsOrAuthor_usernameContains(kw, kw, kw, pageable);
   }
 
   public Question getQuestion(int id) throws DataNotFoundException {
