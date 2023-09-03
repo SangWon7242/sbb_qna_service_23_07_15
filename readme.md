@@ -90,3 +90,27 @@
     )
     GROUP BY Q.id;
     ```
+
+5. 질문 제목  + 질문 내용 + 질문 작성자 + 답변내용 + 답변 작성자 검색
+    ```sql
+    SELECT Q.*
+    FROM question AS Q
+    LEFT JOIN site_user AS SU
+    ON Q.author_id = SU.id
+    LEFT JOIN answer AS A
+    ON Q.id = A.question_id
+    LEFT JOIN site_user AS A_SU
+    ON A.author_id = A_SU.id
+    WHERE (
+        Q.subject LIKE '%admin%'
+        OR
+        Q.content LIKE '%admin%'
+        OR
+        SU.username LIKE '%admin%'
+        OR
+        A.content LIKE '%admin%'
+        OR
+        A_SU.username LIKE '%admin%'		
+    )
+    GROUP BY Q.id;
+    ```
